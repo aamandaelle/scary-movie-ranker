@@ -2,7 +2,7 @@
 User ranks inputs scary movies and ranks them from 1-10.
 import tkinter as tk
 from tkinter import messagebox
-
+# Main application class
 class MovieRankerApp:
     def __init__(self, root):
         self.root = root
@@ -18,26 +18,26 @@ class MovieRankerApp:
         self.label_title = tk.Label(self.main_frame, text="Welcome to the Scary Movie Ranker!", font=("Blackadder ITC", 30), bg="purple", fg="white")
         self.label_title.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 
-        # Load your images here
+        # Load images here
         self.load_images()
 
         # Display the first image in the main window
         self.image_label1 = tk.Label(self.main_frame, image=self.image1, bg="purple")
         self.image_label1.grid(row=1, column=0, columnspan=2, pady=(0, 10))
 
-        self.label_movie = tk.Label(self.main_frame, text="Enter Scary Movie Name:", bg="purple", fg="white")
-        self.label_movie.grid(row=2, column=0, sticky="w")
+        self.label_movie = tk.Label(self.main_frame, text="Enter Scary Movie Name:", font=("Times New Roman", 12), bg="purple", fg="white")
+        self.label_movie.grid(row=2, column=0, sticky="e", padx=(5, 2))
 
         self.entry_movie = tk.Entry(self.main_frame, width=30)
-        self.entry_movie.grid(row=2, column=1, pady=5)
+        self.entry_movie.grid(row=2, column=1, pady=5, sticky="w")
 
-        self.label_rank = tk.Label(self.main_frame, text="Rank (1-10):", bg="purple", fg="white")
-        self.label_rank.grid(row=3, column=0, sticky="w")
+        self.label_rank = tk.Label(self.main_frame, text="Rank (1-10):", font=("Times New Roman", 12), bg="purple", fg="white")
+        self.label_rank.grid(row=3, column=0, sticky="e", padx=(5, 2))
 
         self.entry_rank = tk.Entry(self.main_frame, width=5)
-        self.entry_rank.grid(row=3, column=1, pady=5)
+        self.entry_rank.grid(row=3, column=1, pady=5, sticky="w")
 
-        # Set the buttons' background color to yellow and text color to black
+        # Set up buttons and set background color to yellow and text color to black
         self.add_button = tk.Button(self.main_frame, text="Add Movie", command=self.add_movie, bg="yellow", fg="black")
         self.add_button.grid(row=4, column=0, columnspan=2, pady=5)
 
@@ -51,9 +51,9 @@ class MovieRankerApp:
         self.movie_rankings = {}
 
     def load_images(self):
-        # Load .png images using PhotoImage
-        self.image1 = tk.PhotoImage(file=r"C:\Users\amand\Documents\software dev\scarymoviecharacters.png")  
-        self.image2 = tk.PhotoImage(file=r"C:\Users\amand\Documents\software dev\chuckypennywiseandsaw.png") 
+        # Load the two .png images using relative paths
+        self.image1 = tk.PhotoImage(file="scarymoviecharacters.png")
+        self.image2 = tk.PhotoImage(file="chuckypennywiseandsaw.png")
 
     def add_movie(self):
         movie = self.entry_movie.get().strip()
@@ -62,7 +62,7 @@ class MovieRankerApp:
             if not (1 <= rank <= 10):
                 raise ValueError("Rank must be between 1 and 10")
         except ValueError:
-            messagebox.showerror("Invalid input", "Please enter a valid rank between 1 and 10, including decimal values.")
+            messagebox.showerror("Invalid input", "Please enter a valid rank between 1 and 10.")
             return
 
         if movie:
@@ -96,3 +96,5 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = MovieRankerApp(root)
     root.mainloop()
+
+
